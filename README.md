@@ -1,4 +1,4 @@
-#Pairs Game
+# Pairs Game
 
 A small picture matching game to test my understanding of DOM manipulation,
 arrays, and objects. 

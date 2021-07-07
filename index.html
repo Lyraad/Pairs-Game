@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
     <title>Pairs Game</title>
 </head>
@@ -19,30 +20,43 @@
             <div class="col-lg-2 menu_region" style="min-height: 400px;">WORLD</div>
             <div class="col-lg-10 gameplay_region" style="min-height: 400px;">
                 <div class="row">
-                    <div class="col-lg-3 card_container" id="card_slot_1"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_2"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_3"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_4"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
+                    <div class="col-lg-3 card_container" id="card_slot_1"><img src="cards/CardBack.png" class="card_image" id="img_card_1"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_2"><img src="cards/CardBack.png" class="card_image" id="img_card_2"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_3"><img src="cards/CardBack.png" class="card_image" id="img_card_3"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_4"><img src="cards/CardBack.png" class="card_image" id="img_card_4"></div>
                 </div>   
                 <div class="row">
-                    <div class="col-lg-3 card_container" id="card_slot_5"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_6"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_7"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_8"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
+                    <div class="col-lg-3 card_container" id="card_slot_5"><img src="cards/CardBack.png" class="card_image" id="img_card_5"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_6"><img src="cards/CardBack.png" class="card_image" id="img_card_6"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_7"><img src="cards/CardBack.png" class="card_image" id="img_card_7"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_8"><img src="cards/CardBack.png" class="card_image" id="img_card_8"></div>
                 </div>   
                 <div class="row">
-                    <div class="col-lg-3 card_container" id="card_slot_9"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_10"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_11"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_12"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
+                    <div class="col-lg-3 card_container" id="card_slot_9"><img src="cards/CardBack.png" class="card_image" id="img_card_9"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_10"><img src="cards/CardBack.png" class="card_image" id="img_card_10"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_11"><img src="cards/CardBack.png" class="card_image" id="img_card_11"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_12"><img src="cards/CardBack.png" class="card_image" id="img_card_12"></div>
                 </div> 
                 <div class="row">
-                    <div class="col-lg-3 card_container" id="card_slot_13"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_14"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_15"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
-                    <div class="col-lg-3 card_container" id="card_slot_16"><img src="/cards/CardBack.png" class="card_image" alt=""></div>
+                    <div class="col-lg-3 card_container" id="card_slot_13"><img src="cards/CardBack.png" class="card_image" id="img_card_13"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_14"><img src="cards/CardBack.png" class="card_image" id="img_card_14"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_15"><img src="cards/CardBack.png" class="card_image" id="img_card_15"></div>
+                    <div class="col-lg-3 card_container" id="card_slot_16"><img src="cards/CardBack.png" class="card_image" id="img_card_16"></div>
                 </div> 
             </div>
+        </div>
+        
+        <!-- Following div row contains debug features, remove or comment out for releasee versions -->
+        <div class="row">
+            <h2>DEBUG OPTIONS</h2>
+            <div class="col-lg3">
+                <button id="debug1">Reset Cards</button>
+            </div>
+            <div class="col-lg3">
+                <button id="debug2">Shuffle Cards</button>
+            </div>
+            <div class="col-lg3"></div>
+            <div class="col-lg3"></div>
         </div>
     
     </div>

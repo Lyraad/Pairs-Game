@@ -1,69 +1,82 @@
 //Global Variables
 var var_buffer_card = null;
-var var_buffer_set = null;
 var var_selection_card = 0;
+var obj_card = [];
+var action_allowed = true;
 
 //On Document load, set all DOM variables and define 
 
 document.addEventListener('DOMContentLoaded',function(){
 
     //Card Object constructor defined
-    function Card(index, set, shown, matched) {
-        this.Index = index;
-        this.Set = set;
-        this.Shown = shown;
-        this.Matched = matched;
+    class Card {
+        constructor(set, shown, matched) {
+            this.Set = set;
+            this.Shown = shown;
+            this.Matched = matched;
+        }
     }
 
+    //DOM variable definitions
+    var all_cards = $('.card_image');
+    var card_windows = $('.card_container');
+
+
     // Initial object intialisation
-    var obj_card_1 = new Card(1, 1, false, false);
-    var obj_card_2 = new Card(2, 1, false, false);
-    var obj_card_3 = new Card(3, 2, false, false);
-    var obj_card_4 = new Card(4, 2, false, false);
-    var obj_card_5 = new Card(5, 3, false, false);
-    var obj_card_6 = new Card(6, 3, false, false);
-    var obj_card_7 = new Card(7, 4, false, false);
-    var obj_card_8 = new Card(8, 4, false, false);
-    var obj_card_9 = new Card(9, 5, false, false);
-    var obj_card_10 = new Card(10, 5, false, false);
-    var obj_card_11 = new Card(11, 6, false, false);
-    var obj_card_12 = new Card(12, 6, false, false);
-    var obj_card_13 = new Card(13, 7, false, false);
-    var obj_card_14 = new Card(14, 7, false, false);
-    var obj_card_15 = new Card(15, 8, false, false);
-    var obj_card_16 = new Card(16, 8, false, false);
+
+        obj_card.push(new Card(1, false, false));
+        obj_card.push(new Card(1, false, false));
+        obj_card.push(new Card(2, false, false));
+        obj_card.push(new Card(2, false, false));
+        obj_card.push(new Card(3, false, false));
+        obj_card.push(new Card(3, false, false));
+        obj_card.push(new Card(4, false, false));
+        obj_card.push(new Card(4, false, false));
+        obj_card.push(new Card(5, false, false));
+        obj_card.push(new Card(5, false, false));
+        obj_card.push(new Card(6, false, false));
+        obj_card.push(new Card(6, false, false));
+        obj_card.push(new Card(7, false, false));
+        obj_card.push(new Card(7, false, false));
+        obj_card.push(new Card(8, false, false));
+        obj_card.push(new Card(8, false, false));
+        all_cards.css('visibility','hidden');
 
     //Function to reset objects later if needed
     function fn_reset_cards() {
         all_cards.attr("src", 'cards/CardBack.png');
+        all_cards.css('visibility','visible');
+        $(".card_container").css('background-color','transparent')
         console.log('All cards hidden');
-        obj_card_1 = new Card(1, 1, false, false);
-        obj_card_2 = new Card(2, 1, false, false);
-        obj_card_3 = new Card(3, 2, false, false);
-        obj_card_4 = new Card(4, 2, false, false);
-        obj_card_5 = new Card(5, 3, false, false);
-        obj_card_6 = new Card(6, 3, false, false);
-        obj_card_7 = new Card(7, 4, false, false);
-        obj_card_8 = new Card(8, 4, false, false);
-        obj_card_9 = new Card(9, 5, false, false);
-        obj_card_10 = new Card(10, 5, false, false);
-        obj_card_11 = new Card(11, 6, false, false);
-        obj_card_12 = new Card(12, 6, false, false);
-        obj_card_13 = new Card(13, 7, false, false);
-        obj_card_14 = new Card(14, 7, false, false);
-        obj_card_15 = new Card(15, 8, false, false);
-        obj_card_16 = new Card(16, 8, false, false);
-    
+        obj_card = [];
+        obj_card.push(new Card(1, false, false));
+        obj_card.push(new Card(1, false, false));
+        obj_card.push(new Card(2, false, false));
+        obj_card.push(new Card(2, false, false));
+        obj_card.push(new Card(3, false, false));
+        obj_card.push(new Card(3, false, false));
+        obj_card.push(new Card(4, false, false));
+        obj_card.push(new Card(4, false, false));
+        obj_card.push(new Card(5, false, false));
+        obj_card.push(new Card(5, false, false));
+        obj_card.push(new Card(6, false, false));
+        obj_card.push(new Card(6, false, false));
+        obj_card.push(new Card(7, false, false));
+        obj_card.push(new Card(7, false, false));
+        obj_card.push(new Card(8, false, false));
+        obj_card.push(new Card(8, false, false));
     }
 
-
-
-//DOM variable definitions
-var all_cards = $('.card_image');
-var card_windows = $('.card_container');
-
-
 //event listenters
+
+$('.menu_item_active').on('mouseenter',function(){
+    $(this).css('background-color','blue')
+});
+
+$('.menu_item_active').on('mouseleave',function(){
+    $(this).css('background-color','beige')
+});
+
 
 $('#debug1').on('click', fn_reset_cards);
 $('#debug2').on('click', fn_shuffle_cards);
@@ -73,138 +86,121 @@ $('#debug3').on('click', function(){
 
 
 all_cards.on('click', function (){
+
+
     console.log(this.id);
-    var test = null;
-    switch (this.id){
-        case 'img_card_1':
-            obj_card_1.Shown = true;
-            var_selection_card = 1;
-            var_selection_set = obj_card_1.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_1.Set + '.png');
-            break;
-        case 'img_card_2':
-            obj_card_2.Shown = true;
-            var_selection_card = 2;
-            var_selection_set = obj_card_2.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_2.Set + '.png');
-            break;
-        case 'img_card_3':
-            obj_card_3.Shown = true;
-            var_selection_card = 3;
-            var_selection_set = obj_card_3.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_3.Set + '.png');
-            break;
-        case 'img_card_4':
-            obj_card_4.Shown = true;
-            var_selection_card = 4;
-            var_selection_set = obj_card_4.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_4.Set + '.png');
-            break;
-        case 'img_card_5':
-            obj_card_5.Shown = true;
-            var_selection_card = 5;
-            var_selection_set = obj_card_5.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_5.Set + '.png');
-            break;
-        case 'img_card_6':
-            obj_card_6.Shown = true;
-            var_selection_card = 6;
-            var_selection_set = obj_card_6.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_6.Set + '.png');
-            break;
-        case 'img_card_7':
-            obj_card_7.Shown = true;
-            var_selection_card = 7;
-            var_selection_set = obj_card_7.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_7.Set + '.png');
-            break;
-        case 'img_card_8':
-            obj_card_8.Shown = true;
-            var_selection_card = 8;
-            var_selection_set = obj_card_8.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_8.Set + '.png');
-            break;
-        case 'img_card_9':
-            obj_card_9.Shown = true;
-            var_selection_card = 9;
-            var_selection_set = obj_card_9.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_9.Set + '.png');
-            break;
-        case 'img_card_10':
-            obj_card_10.Shown = true;
-            var_selection_card = 10;
-            var_selection_set = obj_card_10.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_10.Set + '.png');
-            break;
-        case 'img_card_11':
-            obj_card_11.Shown = true;
-            var_selection_card = 11;
-            var_selection_set = obj_card_11.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_11.Set + '.png');
-            break;
-        case 'img_card_12':
-            obj_card_12.Shown = true;
-            var_selection_card = 12;
-            var_selection_set = obj_card_12.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_12.Set + '.png');
-            break;
-        case 'img_card_13':
-            obj_card_13.Shown = true;
-            var_selection_card = 13;
-            var_selection_set = obj_card_13.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_13.Set + '.png');
-            break;
-        case 'img_card_14':
-            obj_card_14.Shown = true;
-            var_selection_card = 14;
-            var_selection_set = obj_card_14.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_14.Set + '.png');
-            break;
-        case 'img_card_15':
-            obj_card_15.Shown = true;
-            var_selection_card = 15;
-            var_selection_set = obj_card_15.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_15.Set + '.png');
-            break;
-        case 'img_card_16':
-            obj_card_16.Shown = true;
-            var_selection_card = 16;
-            var_selection_set = obj_card_16.Set;
-            $(this).attr("src",'cards/CardDesign' + obj_card_16.Set + '.png');
-            break;
+    var image_name = this.id;
+    var card_select = fn_get_obj(image_name);
 
-        default:
-            console.log('switch did not meet a condition')
-            break;
-    }
-    fn_check_card();
-});
+        if (obj_card[card_select].Shown == false && action_allowed == true){
+            console.log("Card index of:" + card_select + " Card part of set:" + obj_card[card_select].Set);
+            $(this).attr("src",'cards/CardDesign'+obj_card[card_select].Set+'.png')
+            obj_card[card_select].Shown = true;
+            if (var_buffer_card == null){
+                var_buffer_card = card_select;
+            } else {
+                if (fn_compare_cards(card_select, var_buffer_card) == true){
+                    console.log('Match Detected')
+                    obj_card[card_select].Matched = true;
+                    obj_card[var_buffer_card].Matched = true;
+                    $('#card_slot_'+ var_buffer_card).css('background-color','green');
+                    $('#card_slot_'+ card_select).css('background-color','green');
+                    var_buffer_card = null;
 
-function fn_check_card(){
-let var_card_container = '#card_slot_' + var_selection_card
-let var_buffer_container = (var_buffer_card == null) ? null : var_buffer_card;
+                    if(fn_check_for_win()==true){
+                        fn_process_win();
+                    };
 
-    if (var_buffer_card == null){
-        var_buffer_card = var_selection_card;
-        var_buffer_set = var_selection_set;
-        $(var_card_container).css('background-color', 'cyan');
-        
-    } else {
-        if (var_buffer_set != var_selection_set){
-        $(var_card_container).css('background-color', 'cyan');   
+                }else{
+                    console.log("No match detected");
+                    $('#card_slot_'+ var_buffer_card).css('background-color','red');
+                    $('#card_slot_'+ card_select).css('background-color','red');
+                    action_allowed = false;
 
-        }else if (var_buffer_set == var_selection_set){
-
+                    setTimeout(function(){
+                        $("#img_card_" + var_buffer_card).attr("src",'cards/CardBack.png');
+                        $("#img_card_" + card_select).attr("src",'cards/CardBack.png');
+                        $('#card_slot_'+ var_buffer_card).css('background-color','transparent');
+                        $('#card_slot_'+ card_select).css('background-color','transparent');
+                        obj_card[card_select].Shown = false;
+                        obj_card[var_buffer_card].Shown = false;
+                        var_buffer_card = null;
+                        action_allowed = true;
+                    }, 1000);
+                }
+            }
+        }else{
+            console.log("Card is already shown, input ignored")
         }
-    }
-  
+    });
 
+
+function fn_get_obj(image_name){
+    switch (image_name){
+        case 'img_card_0':
+            return 0;
+        case 'img_card_1':
+            return 1;
+        case 'img_card_2':
+            return 2;
+        case 'img_card_3':
+            return 3;
+        case 'img_card_4':
+            return 4;
+        case 'img_card_5':
+            return 5;
+        case 'img_card_6':
+            return 6;
+        case 'img_card_7':
+            return 7;
+        case 'img_card_8':
+            return 8;
+        case 'img_card_9':
+            return 9;
+        case 'img_card_10':
+            return 10;
+        case 'img_card_11':
+            return 11;
+        case 'img_card_12':
+            return 12;
+        case 'img_card_13':
+            return 13;
+        case 'img_card_14':
+            return 14;
+        case 'img_card_15':
+            return 15;
+        default:
+            console.log("Could not get image ref")
+}};
+
+function fn_compare_cards(card_select, var_buffer_card){
+    if (obj_card[card_select].Set == obj_card[var_buffer_card].Set){
+        return true;
+    }else{
+        return false;
+    }
 }
 
+function fn_check_for_win(){
+    console.log('Checking win condition');
+    for (let i = 0; i < 16; i++) {
+        if (obj_card[i].Matched == false){
+            console.log("Found an unmatched card, win condition not triggered, exiting check")
+            return false;
+        }
+    }
+    console.log("Could not find any unmatched cards, triggering player win function")
+    return true;
+}
 
+function fn_process_win(){
+    console.log("WIN FUNCTION TRIGGERED");
+    all_cards.css('visibility','hidden');
+};
 
 
 function fn_shuffle_cards(){
+    fn_reset_cards();
     all_cards.attr("src", 'cards/CardBack.png');
     var arr = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
     
@@ -214,28 +210,9 @@ function fn_shuffle_cards(){
         arr[i] = arr[j]
         arr[j] = temp
       }
-        obj_card_1.Set=arr[0];
-        obj_card_2.Set=arr[1];
-        obj_card_3.Set=arr[2];
-        obj_card_4.Set=arr[3];
-        obj_card_5.Set=arr[4];
-        obj_card_6.Set=arr[5];
-        obj_card_7.Set=arr[6];
-        obj_card_8.Set=arr[7];
-        obj_card_9.Set=arr[8];
-        obj_card_10.Set=arr[9];
-        obj_card_11.Set=arr[10];
-        obj_card_12.Set=arr[11];
-        obj_card_13.Set=arr[12];
-        obj_card_14.Set=arr[13];
-        obj_card_15.Set=arr[14];
-        obj_card_16.Set=arr[15];
+    for(let i = 0; i<obj_card.length; i++){
+        obj_card[i].Set = arr[i];
+    }
 }
 
-
-
-})
-
-
-
-
+});

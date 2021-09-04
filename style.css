@@ -33,19 +33,4 @@ color: black;
 
 }
 
-.menu_item_active{
-    width: 50%;
-    height: 30px;
-    color: black;
-    background-color: beige;
-    margin: auto;
-}
-
-
-.menu_item_disabled{
-    width: 50%;
-    height: 30px;
-    background-color: beige;
-}
-
 /* Definitions by ID */
